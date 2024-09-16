@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import Newsitem from "./Newsitem";
-const Newsboard = () => {
+const Newsboard = ({category}) => {
     const [articles, setArticles] = useState([]);
 
     useEffect(() => {
-        let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${import.meta.env.VITE_API_KEY}`;
+        let url = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${import.meta.env.VITE_API_KEY}`;
         console.log(import.meta.env.VITE_API_KEY);  // Check if the API key is correct
 
         fetch(url)
@@ -20,7 +20,7 @@ const Newsboard = () => {
                 setArticles(data.articles);
             })
             .catch(error => console.error("There was a problem with the fetch operation:", error));
-    }, []);
+    }, [category]);
     return (
         <div>
             <h2 className="text-center">Latest <span className="badge bg-danger">News</span></h2>
